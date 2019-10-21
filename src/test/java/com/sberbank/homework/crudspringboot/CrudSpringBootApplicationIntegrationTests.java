@@ -1,5 +1,6 @@
 package com.sberbank.homework.crudspringboot;
 
+import com.sberbank.homework.crudspringboot.dto.PersonDto;
 import com.sberbank.homework.crudspringboot.model.Person;
 
 import org.junit.Test;
@@ -72,14 +73,14 @@ public class CrudSpringBootApplicationIntegrationTests {
 
     @Test
     public void shouldCreatePerson() {
-        Person person = new Person();
-        person.setName("New person");
-        person.setAge(35);
-        person.setCompany("company3");
+        PersonDto personDto = new PersonDto();
+        personDto.setName("New person");
+        personDto.setAge(35);
+        personDto.setCompany("company3");
 
         ResponseEntity<String> response = restTemplate.postForEntity(
                 getApiUrl(),
-                person,
+                personDto,
                 String.class);
 
 
@@ -96,16 +97,16 @@ public class CrudSpringBootApplicationIntegrationTests {
     public void shouldUpdatePersonById() {
         int id = 3;
 
-        Person person = restTemplate.getForObject(
+        PersonDto personDto = restTemplate.getForObject(
                 String.format("%s/%d", getApiUrl(), id),
-                Person.class);
+                PersonDto.class);
 
-        person.setName("new name");
-        person.setAge(100);
+        personDto.setName("new name");
+        personDto.setAge(100);
 
         restTemplate.put(
                 String.format("%s/%d", getApiUrl(), id),
-                person);
+                personDto);
 
         ResponseEntity<String> response = restTemplate.getForEntity(
                 String.format("%s/%d", getApiUrl(), id),
@@ -124,11 +125,11 @@ public class CrudSpringBootApplicationIntegrationTests {
     public void shouldDeletePersonById() {
         int id = 4;
 
-        Person person = restTemplate.getForObject(
+        PersonDto personDto = restTemplate.getForObject(
                 String.format("%s/%d", getApiUrl(), id),
-                Person.class);
+                PersonDto.class);
 
-        assertNotNull(person);
+        assertNotNull(personDto);
 
         restTemplate.delete(String.format("%s/%d", getApiUrl(), id));
 

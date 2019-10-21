@@ -1,9 +1,6 @@
 package com.sberbank.homework.crudspringboot.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -27,8 +24,8 @@ public class Person {
     private String company;
 
     public void update(Person person) {
-        this.name = person.getName();
-        this.company = person.getCompany();
-        this.age = person.getAge();
+        this.name = person.name;
+        this.company = person.company;
+        this.age = person.age;
     }
 }
